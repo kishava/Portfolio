@@ -6,4 +6,5 @@ Then open src/data/siteContent.ts and set:
 
   cvDownloadEnabled: true
 
-The Download CV button in the hero will link to /cv/Avashik-Ahamed-CV.pdf.
+The Download CV button resolves via import.meta.env.BASE_URL (see siteContent.ts),
+so it works on GitHub Pages under a repo path as well as on the site root.

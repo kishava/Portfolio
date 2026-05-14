@@ -49,7 +49,8 @@ export const siteContent = {
 
   /** Set to true after adding `public/cv/Avashik-Ahamed-CV.pdf` */
   cvDownloadEnabled: true as boolean,
-  cvPdfPath: "/cv/Avashik-Ahamed-CV.pdf" as const,
+  /** Resolves correctly with Vite `base: "./"` (e.g. GitHub Pages under a subpath). */
+  cvPdfPath: `${import.meta.env.BASE_URL}cv/Avashik-Ahamed-CV.pdf`,
 
   nav: [
     { id: "about", label: "About" },
