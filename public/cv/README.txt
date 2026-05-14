@@ -6,5 +6,7 @@ Then open src/data/siteContent.ts and set:
 
   cvDownloadEnabled: true
 
-The Download CV button resolves via import.meta.env.BASE_URL (see siteContent.ts),
-so it works on GitHub Pages under a repo path as well as on the site root.
+The Download CV button uses import.meta.env.BASE_URL (see siteContent.ts).
+
+Netlify / root hosting: use default Vite base "/".
+GitHub Pages project site: the repo workflow sets VITE_BASE_PATH=/repo-name/ when building.
