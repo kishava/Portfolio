@@ -9,6 +9,81 @@
       content="Avashik Ahamed — Software Engineering Undergraduate. Portfolio, projects, and contact."
     />
     <title>Avashik Ahamed | Portfolio</title>
+    <style>
+      #root:empty,
+      .static-fallback {
+        min-height: 100vh;
+      }
+
+      .static-fallback {
+        box-sizing: border-box;
+        display: grid;
+        place-items: center;
+        padding: 32px 18px;
+        font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+        color: #eef2ff;
+        background:
+          radial-gradient(circle at 78% 20%, rgb(25 145 170 / 0.22), transparent 28rem),
+          radial-gradient(circle at 18% 72%, rgb(92 77 155 / 0.22), transparent 26rem),
+          #070b14;
+      }
+
+      .static-fallback__panel {
+        width: min(100%, 760px);
+        border: 1px solid rgb(255 255 255 / 0.12);
+        border-radius: 12px;
+        padding: clamp(28px, 6vw, 56px);
+        background: rgb(16 24 38 / 0.68);
+        box-shadow: 0 28px 80px rgb(0 0 0 / 0.34);
+      }
+
+      .static-fallback__eyebrow {
+        margin: 0 0 14px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #77d5e3;
+      }
+
+      .static-fallback h1 {
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(44px, 10vw, 84px);
+        font-style: italic;
+        font-weight: 400;
+        line-height: 0.98;
+      }
+
+      .static-fallback__title {
+        margin: 22px 0 0;
+        max-width: 620px;
+        font-size: clamp(18px, 3.4vw, 24px);
+        line-height: 1.5;
+        color: rgb(238 242 255 / 0.78);
+      }
+
+      .static-fallback__links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 34px;
+      }
+
+      .static-fallback a {
+        color: #ffffff;
+      }
+
+      .static-fallback__links a {
+        border: 1px solid rgb(119 213 227 / 0.35);
+        border-radius: 999px;
+        padding: 11px 16px;
+        background: rgb(119 213 227 / 0.1);
+        font-size: 14px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+    </style>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -17,7 +92,22 @@
     />
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <main class="static-fallback" aria-label="Portfolio loading fallback">
+        <section class="static-fallback__panel">
+          <p class="static-fallback__eyebrow">Open to opportunities</p>
+          <h1>Avashik Ahamed</h1>
+          <p class="static-fallback__title">
+            Software Engineering Undergraduate based in Rajagiriya, Sri Lanka.
+          </p>
+          <div class="static-fallback__links">
+            <a href="mailto:avashik529@gmail.com">Email</a>
+            <a href="https://github.com/kishava">GitHub</a>
+            <a href="https://linkedin.com/in/avashik">LinkedIn</a>
+          </div>
+        </section>
+      </main>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
