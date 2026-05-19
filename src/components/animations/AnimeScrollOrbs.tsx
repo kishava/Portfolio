@@ -1,8 +1,8 @@
-import { animate, onScroll, type JSAnimation } from "animejs";
+import { animate, type JSAnimation } from "animejs";
 import { useEffect, useRef } from "react";
 
 /**
- * Ambient orbs driven by page scroll via anime.js ScrollObserver sync.
+ * Ambient orbs driven by page scroll via anime.js.
  */
 export function AnimeScrollOrbs() {
   const orbA = useRef<HTMLDivElement>(null);
@@ -46,19 +46,22 @@ export function AnimeScrollOrbs() {
       );
     }
 
-    const observer = onScroll({
-      target: document.documentElement,
-      sync: true,
-      onUpdate: (self) => {
-        const p = self.progress;
-        for (const anim of animations) {
-          anim.seek(p * anim.duration);
-        }
-      },
-    });
+    const syncToScroll = () => {
+      const max =
+        document.documentElement.scrollHeight - window.innerHeight || 1;
+      const progress = Math.min(1, Math.max(0, window.scrollY / max));
+      for (const anim of animations) {
+        anim.seek(progress * anim.duration);
+      }
+    };
+
+    syncToScroll();
+    window.addEventListener("scroll", syncToScroll, { passive: true });
+    window.addEventListener("resize", syncToScroll, { passive: true });
 
     return () => {
-      observer.revert();
+      window.removeEventListener("scroll", syncToScroll);
+      window.removeEventListener("resize", syncToScroll);
       for (const anim of animations) anim.revert();
     };
   }, []);

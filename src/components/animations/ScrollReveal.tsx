@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef, type ReactNode } from "react";
 
 type ScrollRevealProps = {
@@ -16,6 +16,11 @@ export function ScrollReveal({
   depth = "subtle",
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, {
+    once: true,
+    margin: "-48px",
+    amount: 0.15,
+  });
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
@@ -38,23 +43,25 @@ export function ScrollReveal({
     <motion.div
       ref={ref}
       className={className}
-      style={{
-        rotateX,
-        rotateY,
-        z,
-        transformPerspective: 1400,
-        transformStyle: "preserve-3d",
-      }}
-      initial={{ opacity: 0, y: 56, rotateX: 14 }}
-      whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-      viewport={{ once: true, margin: "-72px" }}
+      initial={{ opacity: 0, y: 48 }}
+      animate={isInView ? { opacity: 1, y: 0 } : undefined}
       transition={{
         duration: 0.75,
         delay,
         ease: [0.22, 1, 0.36, 1],
       }}
     >
-      {children}
+      <motion.div
+        style={{
+          rotateX,
+          rotateY,
+          z,
+          transformPerspective: 1400,
+          transformStyle: "preserve-3d",
+        }}
+      >
+        {children}
+      </motion.div>
     </motion.div>
   );
 }

@@ -2,7 +2,6 @@ import {
   motion,
   useMotionValue,
   useScroll,
-  useSpring,
   useTransform,
 } from "framer-motion";
 import { useRef, type PointerEvent } from "react";
@@ -18,14 +17,8 @@ export function ProfilePortrait({ src, alt }: ProfilePortraitProps) {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [10, -10]), {
-    stiffness: 180,
-    damping: 22,
-  });
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-12, 12]), {
-    stiffness: 180,
-    damping: 22,
-  });
+  const rotateX = useTransform(mouseY, [-0.5, 0.5], [10, -10]);
+  const rotateY = useTransform(mouseX, [-0.5, 0.5], [-12, 12]);
 
   const { scrollYProgress } = useScroll({
     target: frameRef,
@@ -57,13 +50,12 @@ export function ProfilePortrait({ src, alt }: ProfilePortraitProps) {
       style={{
         y: scrollY,
         scale: scrollScale,
-        transformPerspective: 1200,
       }}
       onPointerMove={onPointerMove}
       onPointerLeave={onPointerLeave}
     >
       <motion.div
-        className="relative aspect-[3/4] w-full"
+        className="relative aspect-[3/4] w-full [perspective:1200px]"
         style={{
           rotateX,
           rotateY,
@@ -71,7 +63,7 @@ export function ProfilePortrait({ src, alt }: ProfilePortraitProps) {
           transformStyle: "preserve-3d",
         }}
       >
-        <motion.div
+        <div
           className="absolute -inset-3 rounded-[2rem] opacity-60 blur-2xl"
           style={{
             background:
@@ -81,7 +73,7 @@ export function ProfilePortrait({ src, alt }: ProfilePortraitProps) {
           aria-hidden
         />
 
-        <div className="glass relative h-full overflow-hidden rounded-[1.75rem] border border-white/15 shadow-[0_32px_64px_-24px_oklch(0_0_0/0.55)]">
+        <motion.div className="glass relative h-full overflow-hidden rounded-[1.75rem] border border-white/15 shadow-[0_32px_64px_-24px_oklch(0_0_0/0.55)]">
           <img
             src={src}
             alt={alt}
@@ -91,12 +83,12 @@ export function ProfilePortrait({ src, alt }: ProfilePortraitProps) {
             loading="eager"
             decoding="async"
           />
-          <motion.div
+          <div
             className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[oklch(0.14_0.02_260_/0.55)] via-transparent to-transparent"
             style={{ transform: "translateZ(2px)" }}
             aria-hidden
           />
-        </div>
+        </motion.div>
 
         <div className="pointer-events-none absolute -right-2 -top-2 h-24 w-24 sm:h-28 sm:w-28">
           <LottieAccent className="h-full w-full drop-shadow-[0_0_24px_oklch(0.78_0.14_195/0.35)]" />
