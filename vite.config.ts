@@ -26,5 +26,6 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   build: {
     target: "es2020",
+    chunkSizeWarningLimit: 900,
   },
 });
