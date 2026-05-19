@@ -1,11 +1,10 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
 
 type ScrollRevealProps = {
   children: ReactNode;
   className?: string;
   delay?: number;
-  /** Slightly larger entrance motion for hero blocks. */
   depth?: "subtle" | "strong";
 };
 
@@ -15,16 +14,21 @@ export function ScrollReveal({
   delay = 0,
   depth = "subtle",
 }: ScrollRevealProps) {
-  const y = depth === "strong" ? 32 : 24;
+  const reduceMotion = useReducedMotion();
+  const y = depth === "strong" ? 20 : 14;
+
+  if (reduceMotion) {
+    return <div className={className}>{children}</div>;
+  }
 
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y }}
+      initial={{ opacity: 1, y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px", amount: 0.12 }}
+      viewport={{ once: true, margin: "-32px", amount: 0.05 }}
       transition={{
-        duration: 0.6,
+        duration: 0.5,
         delay,
         ease: [0.22, 1, 0.36, 1],
       }}

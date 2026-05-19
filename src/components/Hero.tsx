@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { ArrowDownRight, Download, Mail } from "lucide-react";
 import type { SocialLink as SocialLinkType } from "../data/siteContent";
 import { ProfilePortrait } from "./animations/ProfilePortrait";
@@ -39,12 +38,7 @@ export function Hero({
         aria-hidden
       />
       <div className="relative mx-auto grid max-w-5xl items-center gap-12 lg:grid-cols-[1fr_minmax(240px,320px)] lg:gap-14">
-        <motion.div
-          className="min-w-0"
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        >
+        <div className="min-w-0">
           <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium uppercase tracking-widest text-[oklch(0.78_0.12_195)]">
             <span className="h-1.5 w-1.5 rounded-full bg-[oklch(0.78_0.14_195)]" />
             Open to opportunities
@@ -87,18 +81,13 @@ export function Hero({
             </button>
           </div>
 
-          <motion.div
-            className="mt-12 border-t border-white/10 pt-10"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.35, duration: 0.6 }}
-          >
+          <div className="mt-12 border-t border-white/10 pt-10">
             <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-white/40">
               Connect
             </p>
             <SocialLinks links={socials} />
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         <div className="order-first lg:order-none">
           <ProfilePortrait src={profileImage} alt={`Portrait of ${name}`} />

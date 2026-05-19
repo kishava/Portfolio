@@ -1,6 +1,4 @@
-import { motion, useMotionValue, useTransform } from "framer-motion";
-import { useRef, type PointerEvent } from "react";
-import { LottieAccent } from "./LottieAccent";
+import { PortraitAccent } from "./PortraitAccent";
 
 type ProfilePortraitProps = {
   src: string;
@@ -8,37 +6,11 @@ type ProfilePortraitProps = {
 };
 
 export function ProfilePortrait({ src, alt }: ProfilePortraitProps) {
-  const frameRef = useRef<HTMLDivElement>(null);
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const rotateX = useTransform(mouseY, [-0.5, 0.5], [8, -8]);
-  const rotateY = useTransform(mouseX, [-0.5, 0.5], [-10, 10]);
-
-  function onPointerMove(e: PointerEvent<HTMLDivElement>) {
-    const rect = e.currentTarget.getBoundingClientRect();
-    mouseX.set((e.clientX - rect.left) / rect.width - 0.5);
-    mouseY.set((e.clientY - rect.top) / rect.height - 0.5);
-  }
-
-  function onPointerLeave() {
-    mouseX.set(0);
-    mouseY.set(0);
-  }
-
   return (
-    <div
-      ref={frameRef}
-      className="relative mx-auto w-full max-w-[280px] sm:max-w-xs lg:max-w-sm"
-      onPointerMove={onPointerMove}
-      onPointerLeave={onPointerLeave}
-    >
-      <motion.div
-        className="relative aspect-[3/4] w-full"
-        style={{ rotateX, rotateY, transformPerspective: 1000 }}
-      >
-        <motion.div
-          className="absolute -inset-3 rounded-[2rem] opacity-60 blur-2xl"
+    <div className="group relative mx-auto w-full max-w-[280px] sm:max-w-xs lg:max-w-sm">
+      <div className="relative aspect-[3/4] w-full transition-transform duration-300 motion-safe:group-hover:scale-[1.02]">
+        <div
+          className="absolute -inset-3 rounded-[2rem] opacity-60 blur-2xl transition-opacity duration-300 group-hover:opacity-80"
           style={{
             background:
               "linear-gradient(135deg, oklch(0.55 0.14 195 / 0.45), oklch(0.4 0.08 280 / 0.25))",
@@ -63,9 +35,9 @@ export function ProfilePortrait({ src, alt }: ProfilePortraitProps) {
         </div>
 
         <div className="pointer-events-none absolute -right-2 -top-2 h-24 w-24 sm:h-28 sm:w-28">
-          <LottieAccent className="h-full w-full drop-shadow-[0_0_24px_oklch(0.78_0.14_195/0.35)]" />
+          <PortraitAccent className="h-full w-full drop-shadow-[0_0_24px_oklch(0.78_0.14_195/0.35)]" />
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }
