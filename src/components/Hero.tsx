@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { ArrowDownRight, Download, Mail } from "lucide-react";
 import type { SocialLink as SocialLinkType } from "../data/siteContent";
 import { ProfilePortrait } from "./animations/ProfilePortrait";
-import { ScrollReveal } from "./animations/ScrollReveal";
 import { SocialLinks } from "./SocialLinks";
 
 interface HeroProps {
@@ -40,7 +39,12 @@ export function Hero({
         aria-hidden
       />
       <div className="relative mx-auto grid max-w-5xl items-center gap-12 lg:grid-cols-[1fr_minmax(240px,320px)] lg:gap-14">
-        <ScrollReveal depth="strong" className="min-w-0">
+        <motion.div
+          className="min-w-0"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        >
           <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium uppercase tracking-widest text-[oklch(0.78_0.12_195)]">
             <span className="h-1.5 w-1.5 rounded-full bg-[oklch(0.78_0.14_195)]" />
             Open to opportunities
@@ -94,7 +98,7 @@ export function Hero({
             </p>
             <SocialLinks links={socials} />
           </motion.div>
-        </ScrollReveal>
+        </motion.div>
 
         <div className="order-first lg:order-none">
           <ProfilePortrait src={profileImage} alt={`Portrait of ${name}`} />
