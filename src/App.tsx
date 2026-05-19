@@ -8,6 +8,8 @@ import {
 } from "lucide-react";
 import { useCallback } from "react";
 import { siteContent } from "./data/siteContent";
+import { AnimeScrollOrbs } from "./components/animations/AnimeScrollOrbs";
+import { StaggerReveal } from "./components/animations/StaggerReveal";
 import { ActivityCard } from "./components/ActivityCard";
 import { Footer } from "./components/Footer";
 import { Hero } from "./components/Hero";
@@ -36,18 +38,21 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen">
-      <Navbar nav={siteContent.nav} />
-      <main>
-        <Hero
-          name={siteContent.hero.name}
-          title={siteContent.hero.title}
-          location={siteContent.hero.location}
-          socials={siteContent.socials}
-          cvPdfPath={siteContent.cvPdfPath}
-          cvDownloadEnabled={siteContent.cvDownloadEnabled}
-          onContactClick={scrollToContact}
-        />
+    <div className="relative min-h-screen">
+      <AnimeScrollOrbs />
+      <div className="relative z-10">
+        <Navbar nav={siteContent.nav} />
+        <main>
+          <Hero
+            name={siteContent.hero.name}
+            title={siteContent.hero.title}
+            location={siteContent.hero.location}
+            profileImage={siteContent.hero.profileImage}
+            socials={siteContent.socials}
+            cvPdfPath={siteContent.cvPdfPath}
+            cvDownloadEnabled={siteContent.cvDownloadEnabled}
+            onContactClick={scrollToContact}
+          />
 
         <Section
           id="about"
@@ -64,7 +69,7 @@ function App() {
           title="Skills"
           subtitle="Technologies and practices I use across development, data, and operations-style work."
         >
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <StaggerReveal className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {siteContent.skills.map((cat, i) => (
               <SkillCategoryCard
                 key={cat.title}
@@ -73,7 +78,7 @@ function App() {
                 icon={SKILL_ICONS[i] ?? Code2}
               />
             ))}
-          </div>
+          </StaggerReveal>
         </Section>
 
         <Section
@@ -81,11 +86,11 @@ function App() {
           title="Projects"
           subtitle="Selected work with links to repositories and implementation notes."
         >
-          <div className="grid gap-6 sm:grid-cols-2">
+          <StaggerReveal className="grid gap-6 sm:grid-cols-2">
             {siteContent.projects.map((project) => (
               <ProjectCard key={project.repoUrl} project={project} />
             ))}
-          </div>
+          </StaggerReveal>
         </Section>
 
         <Section
@@ -93,7 +98,7 @@ function App() {
           title="Experience"
           subtitle="Professional roles and measurable contributions."
         >
-          <div className="flex flex-col gap-4">
+          <StaggerReveal className="flex flex-col gap-4">
             {siteContent.experience.map((job) => (
               <TimelineCard
                 key={job.company + job.role}
@@ -103,7 +108,7 @@ function App() {
                 bullets={job.highlights}
               />
             ))}
-          </div>
+          </StaggerReveal>
         </Section>
 
         <Section
@@ -139,11 +144,11 @@ function App() {
           <h3 className="mb-4 mt-12 text-sm font-semibold uppercase tracking-widest text-white/40">
             Leadership & involvement
           </h3>
-          <div className="grid gap-4 sm:grid-cols-2">
+          <StaggerReveal className="grid gap-4 sm:grid-cols-2">
             {siteContent.activities.map((a) => (
               <ActivityCard key={a.title} activity={a} />
             ))}
-          </div>
+          </StaggerReveal>
 
           <h3 className="mb-4 mt-12 text-sm font-semibold uppercase tracking-widest text-white/40">
             Languages
@@ -197,9 +202,10 @@ function App() {
             </div>
           </div>
         </Section>
-      </main>
+        </main>
 
-      <Footer name={siteContent.hero.name} socials={siteContent.socials} />
+        <Footer name={siteContent.hero.name} socials={siteContent.socials} />
+      </div>
     </div>
   );
 }

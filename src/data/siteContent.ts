@@ -65,6 +65,7 @@ export const siteContent = {
     name: "Avashik Ahamed",
     title: "Software Engineering Undergraduate",
     location: "Rajagiriya, Sri Lanka",
+    profileImage: `${import.meta.env.BASE_URL}images/profile.png`,
   },
 
   summary:

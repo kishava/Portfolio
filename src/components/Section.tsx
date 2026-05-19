@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { ScrollReveal } from "./animations/ScrollReveal";
 
 interface SectionProps {
   id: string;
@@ -14,15 +15,19 @@ export function Section({ id, title, subtitle, children }: SectionProps) {
       className="scroll-mt-24 px-4 py-16 sm:scroll-mt-28 sm:px-6 lg:px-8"
     >
       <div className="mx-auto max-w-5xl">
-        <header className="mb-10 sm:mb-12">
-          <h2 className="font-display text-3xl italic tracking-tight text-white sm:text-4xl">
-            {title}
-          </h2>
-          {subtitle ? (
-            <p className="mt-2 max-w-2xl text-base text-white/60">{subtitle}</p>
-          ) : null}
-        </header>
-        {children}
+        <ScrollReveal>
+          <header className="mb-10 sm:mb-12">
+            <h2 className="font-display text-3xl italic tracking-tight text-white sm:text-4xl">
+              {title}
+            </h2>
+            {subtitle ? (
+              <p className="mt-2 max-w-2xl text-base text-white/60">
+                {subtitle}
+              </p>
+            ) : null}
+          </header>
+        </ScrollReveal>
+        <ScrollReveal delay={0.08}>{children}</ScrollReveal>
       </div>
     </section>
   );
