@@ -16,7 +16,7 @@ export function Navbar({ nav }: NavbarProps) {
   }
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-[oklch(0.12_0.02_260_/0.75)] backdrop-blur-xl">
+    <header className="fixed inset-x-0 top-0 z-[100] border-b border-white/5 bg-[oklch(0.12_0.02_260_/0.92)] backdrop-blur-xl">
       <nav
         className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8"
         aria-label="Primary"

@@ -27,12 +27,9 @@ export function Hero({
   onContactClick,
 }: HeroProps) {
   return (
-    <motion.div
+    <section
       id="top"
       className="relative overflow-hidden px-4 pb-20 pt-28 sm:px-6 sm:pb-28 sm:pt-32 lg:px-8"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
     >
       <div
         className="pointer-events-none absolute -right-24 top-20 h-72 w-72 rounded-full blur-3xl sm:h-96 sm:w-96"
@@ -42,10 +39,7 @@ export function Hero({
         }}
         aria-hidden
       />
-      <motion.div
-        className="relative mx-auto grid max-w-5xl items-center gap-12 lg:grid-cols-[1fr_minmax(240px,320px)] lg:gap-14"
-        style={{ transformPerspective: 1400 }}
-      >
+      <div className="relative mx-auto grid max-w-5xl items-center gap-12 lg:grid-cols-[1fr_minmax(240px,320px)] lg:gap-14">
         <ScrollReveal depth="strong" className="min-w-0">
           <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium uppercase tracking-widest text-[oklch(0.78_0.12_195)]">
             <span className="h-1.5 w-1.5 rounded-full bg-[oklch(0.78_0.14_195)]" />
@@ -102,16 +96,10 @@ export function Hero({
           </motion.div>
         </ScrollReveal>
 
-        <motion.div
-          className="order-first lg:order-none"
-          initial={{ opacity: 0, scale: 0.92, rotateY: -16 }}
-          animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-          transition={{ duration: 0.85, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          style={{ transformPerspective: 1200 }}
-        >
+        <div className="order-first lg:order-none">
           <ProfilePortrait src={profileImage} alt={`Portrait of ${name}`} />
-        </motion.div>
-      </motion.div>
-    </motion.div>
+        </div>
+      </div>
+    </section>
   );
 }
